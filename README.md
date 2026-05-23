@@ -14,4 +14,4 @@ My professional portfolio website showcasing my journey as a Business Analyst an
 * **Fast Performance:** Server-side rendering for optimal load speeds.
 
 ## 🌐 Live Demo
-[View Portfolio](https://portfolio-8765197073s-projects.vercel.app/)
+[View Portfolio](https://portfolio-manojitdas-gifs-projects.vercel.app/)

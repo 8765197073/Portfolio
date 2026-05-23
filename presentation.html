@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manojit Das | Digital Portfolio Presentation</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #f0d080;
+            --dark: #0a0a0f;
+            --dark-card: #111118;
+            --dark-border: #181824;
+            --text: #f0eefc;
+            --text-muted: #a09ec0;
+            --text-dark: #6a6890;
+            --accent: #7c6af0;
+            --teal: #36d9c4;
+            --rose: #f06090;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            width: 320px;
+            background: rgba(17, 17, 24, 0.85);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--dark-border);
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .brand-logo {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-logo span {
+            color: var(--gold);
+        }
+
+        .brand-subtitle {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 40px;
+            margin-bottom: auto;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.08);
+            border-color: rgba(201, 168, 76, 0.2);
+            font-weight: 500;
+        }
+
+        .nav-item.active i {
+            color: var(--gold);
+        }
+
+        .sidebar-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-dark);
+            border-top: 1px solid var(--dark-border);
+            padding-top: 24px;
+        }
+
+        .sidebar-footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sidebar-footer a:hover {
+            color: var(--gold);
+        }
+
+        /* MAIN CONTENT AREA */
+        .content {
+            margin-left: 320px;
+            flex: 1;
+            padding: 60px 80px;
+            max-width: 1400px;
+        }
+
+        /* SLIDES CONTAINER */
+        .slide-deck {
+            position: relative;
+            min-height: 80vh;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SLIDE COMPONENTS */
+        .slide-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .slide-category {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-category::after {
+            content: '';
+            height: 1px;
+            width: 40px;
+            background: var(--dark-border);
+        }
+
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .slide-body {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .slide-p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .slide-p strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .highlight-box {
+            background: rgba(30, 27, 21, 0.6);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .highlight-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .highlight-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .highlight-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .highlight-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .slide-visual {
+            position: relative;
+            border-radius: 16px;
+            border: 1px solid var(--dark-border);
+            overflow: hidden;
+            background: rgba(17, 17, 24, 0.5);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .slide-visual:hover img {
+            transform: scale(1.02);
+        }
+
+        .slide-visual::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(230, 195, 100, 0.1);
+            border: 1px solid rgba(230, 195, 100, 0.15);
+            color: var(--gold);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            border-radius: 99px;
+            font-weight: 500;
+        }
+
+        .badge-teal {
+            background: rgba(54, 217, 196, 0.08);
+            border-color: rgba(54, 217, 196, 0.15);
+            color: var(--teal);
+        }
+
+        .badge-violet {
+            background: rgba(124, 106, 240, 0.08);
+            border-color: rgba(124, 106, 240, 0.15);
+            color: var(--accent);
+        }
+
+        /* MULTI-APP GRID */
+        .apps-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .app-card {
+            background: rgba(17, 17, 24, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .app-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--gold);
+        }
+
+        .app-screenshot-thumbnail {
+            width: 100%;
+            height: 120px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .app-screenshot-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            min-height: 60px;
+        }
+
+        .app-links {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .btn-link {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-decoration: none;
+            color: var(--text);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--dark-border);
+            padding: 6px 12px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.02);
+            transition: var(--transition);
+        }
+
+        .btn-link:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+        }
+
+        /* PLAYABLE SIMULATOR OVERLAY */
+        .simulator-box {
+            background: #050508;
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            font-family: var(--font-mono);
+            padding: 24px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sim-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--dark-border);
+            padding-bottom: 12px;
+            font-size: 12px;
+            color: var(--text-dark);
+        }
+
+        .sim-input-row {
+            display: flex;
+            gap: 12px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .sim-prompt {
+            color: var(--gold);
+        }
+
+        .sim-input {
+            background: none;
+            border: none;
+            color: var(--text);
+            outline: none;
+            font-family: inherit;
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .sim-btn {
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sim-btn:hover {
+            background: var(--gold-light);
+        }
+
+        .sim-logs {
+            font-size: 12px;
+            color: var(--text-muted);
+            max-height: 120px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .sim-result {
+            background: rgba(54, 217, 196, 0.05);
+            border: 1px dashed var(--teal);
+            border-radius: 6px;
+            padding: 16px;
+            display: none;
+            font-size: 13px;
+            color: var(--teal);
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        /* NAVIGATION BUTTONS AT BOTTOM */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            border-top: 1px solid var(--dark-border);
+            padding-top: 24px;
+        }
+
+        .btn-nav {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            background: none;
+            border: 1px solid var(--dark-border);
+            padding: 10px 24px;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            color: var(--text);
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-nav.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .slide-counter {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .slide-counter span {
+            color: var(--gold);
+        }
+
+        /* RESUME STATS */
+        .resume-nodes {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .resume-node {
+            border-left: 2px solid var(--gold);
+            padding-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .node-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .node-date {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--gold);
+        }
+
+        .node-company {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .node-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            list-style-type: square;
+            padding-left: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">MANOJIT <span>DAS</span></div>
+            <div class="brand-subtitle">Interactive Briefing</div>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item active" onclick="goToSlide(0)"><i data-lucide="home" style="width: 16px;"></i> 01. Intro & Hero</li>
+            <li class="nav-item" onclick="goToSlide(1)"><i data-lucide="user" style="width: 16px;"></i> 02. About Mindset</li>
+            <li class="nav-item" onclick="goToSlide(2)"><i data-lucide="activity" style="width: 16px;"></i> 03. Competencies</li>
+            <li class="nav-item" onclick="goToSlide(3)"><i data-lucide="terminal" style="width: 16px;"></i> 04. AI Solver Node</li>
+            <li class="nav-item" onclick="goToSlide(4)"><i data-lucide="layers" style="width: 16px;"></i> 05. Pinned Project</li>
+            <li class="nav-item" onclick="goToSlide(5)"><i data-lucide="globe" style="width: 16px;"></i> 06. Deployed Web Apps</li>
+            <li class="nav-item" onclick="goToSlide(6)"><i data-lucide="map" style="width: 16px;"></i> 07. Expansion Vision</li>
+            <li class="nav-item" onclick="goToSlide(7)"><i data-lucide="briefcase" style="width: 16px;"></i> 08. Career Nodes</li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div>Manojit Das Digital Portfolio</div>
+            <a href="https://portfolio-delta-nine-buockq1joj.vercel.app" target="_blank">
+                Visit Live Site <i data-lucide="external-link" style="width: 12px;"></i>
+            </a>
+            <a href="mailto:manojitdas876@gmail.com">
+                manojitdas876@gmail.com <i data-lucide="mail" style="width: 12px;"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+        <div class="slide-deck">
+
+            <!-- SLIDE 1: HERO -->
+            <div class="slide active">
+                <div class="slide-header">
+                    <div class="slide-category">Digital Portal Launch</div>
+                    <h1 class="slide-title">Manojit Das: Luxury Tech Portfolio</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="slide-body">
+                        <p class="slide-p">
+                            Manojit Das's digital portfolio is designed with a premium, sleek **luxury-tech aesthetic** featuring high information density, deep gold outlines, and responsive typography layouts.
+                        </p>
+                        <p class="slide-p">
+                            It encapsulates his professional coordinates as an <strong>Operations Specialist</strong> and <strong>Data Analyst</strong>, as well as the Founder of <strong>Growthlytics</strong>, demonstrating a unique combination of process automation and data analysis tools.
+                        </p>
+                        <div class="highlight-box">
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="check" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Available for Opportunities</div>
+                                    <div class="highlight-desc">Active operations node, based in Kolkata, India.</div>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="git-merge" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Interactive AI Features</div>
+                                    <div class="highlight-desc">Equipped with custom speech advisor (MD-Agent) and simulated terminal solver.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/01_hero.png" alt="Hero Screen" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: ABOUT -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">01 -- Personal Node</div>
+                    <h1 class="slide-title">Operations Mindset, Analytical Precision</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="slide-body">
+                        <p class="slide-p">
+                            Manojit Das acts at the intersection of workflow execution and analytical modeling, targeting customer operations and corporate analytics dashboards.
+                        </p>
+                        <div class="highlight-box">
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="crosshair" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Operations Foundations</div>
+                                    <div class="highlight-desc">Coordinates business logistics, processes transaction queries, and monitors SLAs.</div>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="database" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Business Analytics</div>
+                                    <div class="highlight-desc">Utilizes Excel Power Queries, SQL joins, and Power BI dashboards to forecast market demand and analyze client churn metrics.</div>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="award" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Local Vendor Digitization</div>
+                                    <div class="highlight-desc">Assists local merchants through Growthlytics to establish SEO anchors and launch web-ordering channels.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/02_about.png" alt="About Section" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: COMPETENCIES -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">02 -- Skill Vectors</div>
+                    <h1 class="slide-title">Expertise & Core Competencies</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="slide-body">
+                        <p class="slide-p">
+                            The portfolio lists structured competence meters mapped with responsive styling, showcasing a mature skill index:
+                        </p>
+                        <div class="badge-list" style="margin-bottom: 20px;">
+                            <span class="badge">React / TS / HTML (75%)</span>
+                            <span class="badge badge-teal">SQL / Power BI (80%)</span>
+                            <span class="badge badge-violet">CRM / SLA Goals (90%)</span>
+                            <span class="badge">Gemini SDK (70%)</span>
+                            <span class="badge badge-teal">Operations (85%)</span>
+                            <span class="badge badge-violet">Ledger Systems (72%)</span>
+                        </div>
+                        <p class="slide-p">
+                            These categories represent functional capability in resolving customer queries, building dashboards, and designing custom web ordering tools.
+                        </p>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/03_skills.png" alt="Skills Section" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TERMINAL -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">03 -- Interactive Node</div>
+                    <h1 class="slide-title">Growthlytics AI Problem Solver</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="slide-body">
+                        <p class="slide-p">
+                            An embedded interactive command line module simulating the Growthlytics AI Core.
+                        </p>
+                        <p class="slide-p">
+                            Users can input localized business challenges to simulate how data and AI models generate direct operational solutions. Try it below:
+                        </p>
+                        
+                        <div class="simulator-box">
+                            <div class="sim-header">
+                                <span>growthlytics-ai-node-v1.0.0</span>
+                                <i data-lucide="terminal" style="width: 14px;"></i>
+                            </div>
+                            <div class="sim-logs" id="sim-logs">
+                                system@growthlytics:~$ INITIALIZING... READY.<br>
+                                Try entering: "Local cafe needs online customers" or "Manual entry mistakes"
+                            </div>
+                            <div class="sim-input-row">
+                                <span class="sim-prompt">&gt;</span>
+                                <input type="text" class="sim-input" id="sim-input" placeholder="Type a business problem...">
+                                <button class="sim-btn" onclick="runSim()">Run AI</button>
+                            </div>
+                            <div class="sim-result" id="sim-result"></div>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/04_ai_advisor.png" alt="AI Terminal" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: PINNED PROJECT -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">04 -- Highlighted Project</div>
+                    <h1 class="slide-title">SkillsElevate Upskilling Portal</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="slide-body">
+                        <p class="slide-p">
+                            <strong>SkillsElevate</strong> is a pinned educational upskilling portal engineered to help working professionals and students upgrade their technical capabilities.
+                        </p>
+                        <p class="slide-p">
+                            Integrating Google Gemini API, it curates custom learning trajectories, outlines personality-building tasks, and maps industry-relevant trends.
+                        </p>
+                        <div class="badge-list">
+                            <span class="badge">React</span>
+                            <span class="badge">TypeScript</span>
+                            <span class="badge badge-teal">Google Gemini API</span>
+                            <span class="badge badge-violet">Node.js</span>
+                        </div>
+                        <p class="slide-p" style="font-size: 14px; margin-top: 10px;">
+                            <a href="https://github.com/manojitdas-gif/SKILLSELEVATE" target="_blank" class="btn-link"><i data-lucide="github" style="width: 12px;"></i> View Repository</a>
+                            <a href="https://ai.studio/apps/drive/1fQkoOuZfkoCjGsJhqPD_WWAbm-WDmdgU" target="_blank" class="btn-link"><i data-lucide="external-link" style="width: 12px;"></i> Live App</a>
+                        </p>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/05_projects.png" alt="Featured Project" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: DEPLOYED APPS -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">05 -- Web Deployment</div>
+                    <h1 class="slide-title">Deployed Client Applications</h1>
+                </div>
+                <div class="apps-showcase">
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-name">Growthlytics</div>
+                            <span class="badge badge-teal">Agency Portal</span>
+                        </div>
+                        <div class="app-screenshot-thumbnail">
+                            <img src="screenshot_growthlytics.png" alt="Growthlytics" onerror="this.src='growthlytics.png'">
+                        </div>
+                        <p class="app-desc">Flagship agency portal offering local business scaling, AI diagnostics, and custom SEO management dashboards.</p>
+                        <div class="app-links">
+                            <a href="https://growthlytics-s6rd.vercel.app" target="_blank" class="btn-link"><i data-lucide="external-link" style="width: 12px;"></i> Live App</a>
+                            <a href="https://github.com/manojitdas-gif/Growthlytics" target="_blank" class="btn-link"><i data-lucide="github" style="width: 12px;"></i> Repo</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-name">Momotantra</div>
+                            <span class="badge badge-teal">Order Billing</span>
+                        </div>
+                        <div class="app-screenshot-thumbnail">
+                            <img src="screenshot_momotantra.png" alt="Momotantra" onerror="this.src='momotantra.png'">
+                        </div>
+                        <p class="app-desc">Premium interactive menu card and billing checkout system designed for street-side food stalls and momo vendors.</p>
+                        <div class="app-links">
+                            <a href="https://momotantra-app-a3mw.vercel.app" target="_blank" class="btn-link"><i data-lucide="external-link" style="width: 12px;"></i> Live App</a>
+                            <a href="https://github.com/manojitdas-gif/momotantra-app" target="_blank" class="btn-link"><i data-lucide="github" style="width: 12px;"></i> Repo</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-name">Rever Cafe</div>
+                            <span class="badge badge-teal">Lounge Booking</span>
+                        </div>
+                        <div class="app-screenshot-thumbnail">
+                            <img src="screenshot_revercafe.png" alt="Rever Cafe" onerror="this.src='revercafe.png'">
+                        </div>
+                        <p class="app-desc">Luxury-themed sensory landing page and booking interface built for a modern aesthetic cafe network.</p>
+                        <div class="app-links">
+                            <a href="https://revercafe.vercel.app" target="_blank" class="btn-link"><i data-lucide="external-link" style="width: 12px;"></i> Live App</a>
+                            <a href="https://github.com/manojitdas-gif/Rever-Glasshouse-Cafe-" target="_blank" class="btn-link"><i data-lucide="github" style="width: 12px;"></i> Repo</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-name">RetailFlow AI</div>
+                            <span class="badge badge-teal">AI Forecasting</span>
+                        </div>
+                        <div class="app-screenshot-thumbnail">
+                            <img src="screenshot_retailflow.png" alt="RetailFlow" onerror="this.src='retailflow.png'">
+                        </div>
+                        <p class="app-desc">Retail inventory modeling and sales tracking application utilizing time-series forecasting modules to predict stock demand.</p>
+                        <div class="app-links">
+                            <a href="https://retailflow-ai-opal.vercel.app" target="_blank" class="btn-link"><i data-lucide="external-link" style="width: 12px;"></i> Live App</a>
+                            <a href="https://github.com/manojitdas-gif/RETAILFLOW-AI" target="_blank" class="btn-link"><i data-lucide="github" style="width: 12px;"></i> Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: EXPANSION -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">06 -- Strategic Goals</div>
+                    <h1 class="slide-title">Growthlytics Vision & Expansion Hub</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="slide-body">
+                        <p class="slide-p">
+                            Growthlytics targets small businesses, MSMEs, and offline traditional vendors in West Bengal, helping them build digital structures.
+                        </p>
+                        <div class="highlight-box">
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="shopping-cart" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Interactive Menus & Queues</div>
+                                    <div class="highlight-desc">Momotantra and Rever Cafe showcase localized digital workflows that accelerate customer servicing.</div>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="trending-up" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">Hyper-Local SEO Nodes</div>
+                                    <div class="highlight-desc">Expanding organic business discovery in municipal zones through search optimization and business listing anchors.</div>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon"><i data-lucide="shield-check" style="width: 18px;"></i></div>
+                                <div class="highlight-text">
+                                    <div class="highlight-title">24/7 Operations Support</div>
+                                    <div class="highlight-desc">Headquarters established in Konnagar, West Bengal with support lines active for offline vendor onboarding.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/06_agency_hub.png" alt="Agency Hub" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: RESUME -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-category">07 -- Experience & Credentials</div>
+                    <h1 class="slide-title">Career Work Nodes</h1>
+                </div>
+                <div class="slide-grid">
+                    <div class="resume-nodes">
+                        <div class="resume-node">
+                            <div class="node-header">
+                                <div class="node-title">Founder, Growthlytics</div>
+                                <div class="node-date">2026 - Present</div>
+                            </div>
+                            <span class="node-company">Digital Marketing & AI Agency</span>
+                            <ul class="node-desc">
+                                <li>Directing digital scaling campaigns and designing operations architecture for local businesses.</li>
+                                <li>Integrating basic AI assistants and menu-ordering modules into offline shops.</li>
+                            </ul>
+                        </div>
+                        <div class="resume-node">
+                            <div class="node-header">
+                                <div class="node-title">Customer Service Associate</div>
+                                <div class="node-date">Jun 2025 - Feb 2026</div>
+                            </div>
+                            <span class="node-company">Tech Mahindra | Kolkata</span>
+                            <ul class="node-desc">
+                                <li>Managed 50+ daily inbound/outbound client queries, meeting SLA goals.</li>
+                                <li>Extracted and analyzed feedback data in Excel to reduce repeat contacts by 15%.</li>
+                            </ul>
+                        </div>
+                        <div class="resume-node">
+                            <div class="node-header">
+                                <div class="node-title">Business Analytics Intern</div>
+                                <div class="node-date">Jul 2023 - Aug 2023</div>
+                            </div>
+                            <span class="node-company">Bharat Intern</span>
+                            <ul class="node-desc">
+                                <li>Performed Exploratory Data Analysis (EDA) on commercial transaction sets using Excel and Python.</li>
+                                <li>Built interactive Power BI dashboards and configured supermarket demand forecasting.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <img src="presentation_slides/07_resume.png" alt="Resume Tab" onerror="this.src='profile.png'">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- NAVIGATION CONTROLS -->
+        <div class="controls">
+            <button class="btn-nav disabled" id="btn-prev" onclick="prevSlide()"><i data-lucide="chevron-left" style="width: 16px;"></i> Previous</button>
+            <div class="slide-counter" id="slide-counter">Slide <span>1</span> of 8</div>
+            <button class="btn-nav" id="btn-next" onclick="nextSlide()">Next <i data-lucide="chevron-right" style="width: 16px;"></i></button>
+        </div>
+    </div>
+
+    <!-- PRESENTATION SCRIPTS -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const navItems = document.querySelectorAll('.nav-item');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const slideCounterSpan = document.querySelector('#slide-counter span');
+
+        function updateSlideVisibility() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            navItems.forEach((item, index) => {
+                if (index === currentSlide) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            slideCounterSpan.textContent = currentSlide + 1;
+
+            if (currentSlide === 0) {
+                btnPrev.classList.add('disabled');
+            } else {
+                btnPrev.classList.remove('disabled');
+            }
+
+            if (currentSlide === slides.length - 1) {
+                btnNext.classList.add('disabled');
+            } else {
+                btnNext.classList.remove('disabled');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlideVisibility();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideVisibility();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlideVisibility();
+        }
+
+        // AI simulator function
+        function runSim() {
+            const input = document.getElementById('sim-input').value.trim();
+            const logs = document.getElementById('sim-logs');
+            const result = document.getElementById('sim-result');
+            
+            if (!input) return;
+            
+            logs.innerHTML += `<br><span style="color:#ffffff">&gt; Analyzing: "${input}"</span>`;
+            logs.innerHTML += `<br><span style="color:var(--text-dark)">[INFO] Running Growthlytics AI Core...</span>`;
+            
+            setTimeout(() => {
+                let strategy = "";
+                if (input.toLowerCase().includes("cafe") || input.toLowerCase().includes("customer") || input.toLowerCase().includes("restaurant")) {
+                    strategy = "<strong>Cafe Strategy Node:</strong> Deploy interactive digital billing app (Rever Cafe/Momotantra type) to speed checkouts. Launch localized SEO business page to capture mobile query volumes within 5km.";
+                } else if (input.toLowerCase().includes("manual") || input.toLowerCase().includes("mistake") || input.toLowerCase().includes("data")) {
+                    strategy = "<strong>Operations Strategy Node:</strong> Replace manual ledger writing with automated Excel Power Query invoicing. Model transactions into structured SQL database tables, connecting data nodes to prevent manual key entry errors.";
+                } else {
+                    strategy = "<strong>AI Advisory Node:</strong> Segment vendor target user base. Build basic mobile-optimized web ordering sheet to transition manual processes. Anchor digital local page maps.";
+                }
+                
+                result.innerHTML = strategy;
+                result.style.display = "block";
+                logs.innerHTML += `<br><span style="color:var(--teal)">[SUCCESS] Strategy generated!</span>`;
+                logs.scrollTop = logs.scrollHeight;
+            }, 1000);
+        }
+
+        // Initialize icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
