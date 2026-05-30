@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Syne:wght@400..800&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
     <style>
         /* CSS VARIABLES & DESIGN SYSTEM (DESIGN.md) */
@@ -4478,7 +4478,7 @@
                 <div class="avatar-container" style="perspective: 1000px;">
                     <div class="avatar-glow"></div>
                     <div class="avatar-border">
-                        <img src="profile.png" alt="Manojit Das" class="avatar-image">
+                        <img src="profile.png" alt="Manojit Das" class="avatar-image" decoding="async">
                     </div>
                     <div style="position: absolute; bottom: 16px; left: 16px; z-index: 10; display: flex; flex-direction: column; gap: 4px;">
                         <span class="badge badge-teal" style="box-shadow: 0 4px 12px rgba(0,0,0,0.5);">FOUNDER & CEO</span>
@@ -4801,7 +4801,7 @@
                 <!-- Growthlytics App -->
                 <div class="vercel-card reveal">
                     <div class="vercel-img-box">
-                        <img src="growthlytics.png" alt="Growthlytics Dashboard">
+                        <img src="growthlytics.png" alt="Growthlytics Dashboard" loading="lazy" decoding="async">
                         <div class="vercel-badge-overlay">
                             <span class="badge badge-teal">Agency Platform</span>
                         </div>
@@ -4828,7 +4828,7 @@
                 <!-- Momotantra App -->
                 <div class="vercel-card reveal">
                     <div class="vercel-img-box">
-                        <img src="momotantra.png" alt="Momotantra ordering platform">
+                        <img src="momotantra.png" alt="Momotantra ordering platform" loading="lazy" decoding="async">
                         <div class="vercel-badge-overlay">
                             <span class="badge badge-teal">Digital Ordering</span>
                         </div>
@@ -4855,7 +4855,7 @@
                 <!-- Rever Cafe App -->
                 <div class="vercel-card reveal">
                     <div class="vercel-img-box">
-                        <img src="revercafe.png" alt="Rever Cafe bookings">
+                        <img src="revercafe.png" alt="Rever Cafe bookings" loading="lazy" decoding="async">
                         <div class="vercel-badge-overlay">
                             <span class="badge badge-teal">Aesthetic Lounge</span>
                         </div>
@@ -4882,7 +4882,7 @@
                 <!-- RetailFlow AI App -->
                 <div class="vercel-card reveal">
                     <div class="vercel-img-box">
-                        <img src="retailflow.png" alt="RetailFlow AI dashboard">
+                        <img src="retailflow.png" alt="RetailFlow AI dashboard" loading="lazy" decoding="async">
                         <div class="vercel-badge-overlay">
                             <span class="badge badge-teal">AI Analytics</span>
                         </div>
@@ -4909,7 +4909,7 @@
                 <!-- TechAI App -->
                 <div class="vercel-card reveal">
                     <div class="vercel-img-box">
-                        <img src="techai.png" alt="TechAI learning platform">
+                        <img src="techai.png" alt="TechAI learning platform" loading="lazy" decoding="async">
                         <div class="vercel-badge-overlay">
                             <span class="badge badge-teal">AI Dashboard</span>
                         </div>
@@ -5767,7 +5767,13 @@
 
     <script>
         // Initialize Lucide Icons
-        lucide.createIcons();
+        if (window.lucide) {
+            lucide.createIcons();
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                if (window.lucide) lucide.createIcons();
+            });
+        }
 
         // 10. INTERACTIVE RESUME TABS
         const tabBtns = document.querySelectorAll('.resume-tab-btn');
@@ -5849,9 +5855,10 @@
                     const p2 = particles[j];
                     const dx = p.x - p2.x;
                     const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const distSq = dx * dx + dy * dy;
 
-                    if (dist < 120) {
+                    if (distSq < 14400) { // 120 * 120 = 14400
+                        const dist = Math.sqrt(distSq);
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
